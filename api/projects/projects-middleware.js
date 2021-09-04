@@ -24,10 +24,12 @@ async function validateProjectId(req,res,next) {
     }
 }
 
-function validateProjectName(req,res,next){
+function validateProjectBody(req,res,next){
     if  (
         !req.body.name ||
-        typeof req.body.name !== 'string'
+        typeof req.body.name !== 'string' ||
+        !req.body.text ||
+        typeof req.body.text !== 'string'
       ) {
         next({ status: 400 })
       } else {
@@ -35,15 +37,14 @@ function validateProjectName(req,res,next){
       }
 }
 
-function validateProjectDescription(req,res,next){
+function validateProjectCompleted(req,res,next){
     if  (
-        !req.body.text ||
-        typeof req.body.text !== 'string'
+        req.body.completed !== null 
       ) {
-        next({ message: "missing required text field", status: 400 })
+        next();
       } else {
-        next()
+        next({ status: 400})
       }
 }
 
-  module.exports = { logger, validateProjectId, validateProjectName, validateProjectDescription  }
+  module.exports = { logger, validateProjectId, validateProjectBody, validateProjectCompleted  }
