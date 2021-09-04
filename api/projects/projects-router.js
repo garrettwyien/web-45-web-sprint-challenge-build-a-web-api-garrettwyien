@@ -17,6 +17,8 @@ router.get('/:id', logger, validateProjectId, (req,res)=>{
     res.json(req.project);
 });
 
+//I am struggling with my Post and Put requests. In postman, I manually inputted a test object as JSON into the body of my post request, which showed up in the logger as a valid object with the appropriate key value pairs, but it does not actually post, and it keeps yielding [object Object]. I compared my code to all my different module and guided projects this week and was unable to figure out why it is not working. If the grader sees where the error is, I would greatly appreciate their input. Thanks!
+
 router.post('/', logger, validateProjectBody, (req,res,next)=>{
     const newProject = req.body;
     Projects.insert(newProject)
